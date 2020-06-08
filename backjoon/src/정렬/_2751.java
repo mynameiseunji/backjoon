@@ -22,7 +22,7 @@ public class _2751 {
 			System.out.println(origin[i]);
 		}
 	}
-
+	
 	public static void divide(int[] arr, int start, int end) {
 		if ((end - start) == 1) {
 			return;

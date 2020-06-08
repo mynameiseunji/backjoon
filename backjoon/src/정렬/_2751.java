@@ -12,41 +12,52 @@ public class _2751 {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine()); // 정렬할 개수
-		int origin[] = new int[N]; // 원래 배열
+		int[] origin = new int[N]; // 원래 배열
 		for (int i = 0; i < N; i++) {
 			origin[i] = Integer.parseInt(br.readLine());
 		}
-		divide(origin, 0, N);
+		divide(origin, 0, origin.length);
 
-		int sorted[] = new int[N]; // 정렬된 후 배열
+		for (int i = 0; i < origin.length; i++) {
+			System.out.println(origin[i]);
+		}
 	}
 
-	public static void divide(int arr[], int start, int end) {
-		int l = arr.length / 2;
-		int a1[] = new int[l];
-		int a2[] = new int[end - (start+l)];
-		if(arr.length == 1) {
-			
+	public static void divide(int[] arr, int start, int end) {
+		if ((end - start) == 1) {
+			return;
+		} else {
+			int mid = (start + end) / 2;
+			divide(arr, start, mid);
+			divide(arr, mid, end);
+			merge(arr, start, mid, end);
 		}
-		else {
-			for (int i = 0; i < l; i++) {
-				a1[i] = arr[start + i];
-			}
-			for (int i = l; i < end; i++) {
-				a2[i - l] = arr[start + l + i];
-			}
-		}
-		divide(a1, start, l);
-		divide(a2, l, end);
-		merge(a1, a2);
 	}
 
-	public static void merge(int arr1[], int arr2[]) {
-		int merge[] = new int[arr1.length + arr2.length];
-		for (int i = 0; i < merge.length; i++) {
-//			while() {
-//				
-//			}
+	public static void merge(int[] arr, int start, int mid, int end) {
+		int sorted[] = new int[end - start];
+
+		int s = 0;
+		int i = start;
+		int j = mid;
+
+		while (i < mid && j < end) {
+			if (arr[i] < arr[j]) {
+				sorted[s++] = arr[i++];
+			} else {
+				sorted[s++] = arr[j++];
+			}
 		}
+		while (i < mid) {
+			sorted[s++] = arr[i++];
+		}
+		while (j < end) {
+			sorted[s++] = arr[j++];
+		}
+		s = 0;
+		for (int m = start; m < end; m++) {
+			arr[m] = sorted[s++];
+		}
+
 	}
 }

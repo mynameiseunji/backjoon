@@ -56,7 +56,8 @@ public class HeapSort {
 			arr[arr.length - i] = -1; // 삭제 된 노드 표시
 			int temp = 0;
 			index = 0;
-			while ((arr[index] != -1) && index < arr.length / 2) {
+			while (index < arr.length / 2) {
+				if(arr[index]!=1) {
 				if (arr[index * 2 + 1] > arr[index * 2 + 2]) { // 자식 비교 오른쪽이 더 작을경우
 					if (arr[index * 2 + 2] < arr[index]) { // 부모랑 비교
 						temp = arr[index];
